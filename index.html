@@ -17,7 +17,7 @@ limitations under the License.
 <html lang="en">
 
 <head>
-  <title>&lt;model-viewer&gt; codelab</title>
+  <title>Audi A6</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,22 +26,114 @@ limitations under the License.
   <!-- 💁 Include both scripts below to support all browsers! -->
 
   <!-- Loads <model-viewer> for modern browsers: -->
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js">
+    <script type="module"
+    src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js">
   </script>
 
   <!-- Loads <model-viewer> for old browsers like IE11: -->
-  <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js">
+    <script nomodule
+    src="https://unpkg.com/@google/model-viewer@0.3.1/dist/model-viewer-legacy.js">
   </script>
   <script src="https://unpkg.com/@magicleap/prismatic@0.18.2/prismatic.min.js"></script>
+  <style>
+    
+    body, html {
+      height: 100%;
+      font-size: 10pt;
+    }
+
+    label {
+      display: inline-block;
+      width: 120px;
+      height: 24px;
+    }
+
+    input {
+      vertical-align: middle;
+    }
+
+    input.number {
+      border: 0;
+      background: transparent;
+      font-size: 16px;
+      width: 32px;
+      outline: none;
+    }
+
+    select {
+      font-size: 14px;
+    }
+
+    #container {
+      display: flex;
+      height: 100%;
+    }
+
+    model-viewer {
+      flex-grow: 1;
+      height: 100%;
+    }
+
+    #instructions {
+      width: 320px;
+      margin-top: 10px;
+      margin-left: 30px;
+      margin-bottom: 20px;
+    }
+
+    .hotspot{
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      border: none;
+      background-color: blue;
+      --min-hotspot-opacity: 0;
+    }
+
+    .annotation{
+      background-color: #888888;
+      position: absolute;
+      transform: translate(10px, 10px);
+      border-radius: 10px;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .hotspot.selected{
+      background-color: red;
+    }
+
+    .hotspot:not(.selected) > .annotation{
+      display: none;
+    }
+
+    @media screen and (max-width: 320px) {
+      #instructions {
+        display: none;
+      }
+    }
+  
+  </style>
 </head>
 
 <body>
   <model-viewer src="third_party/a6/A6.glb" 
-  ar  camera-controls alt="A 3D model of an astronaut" ios-src="third_party/a6/A6.usdz" magic-leap unstable-webxr
-              camera-orbit="-20deg 75deg"
-  alt="A 3D model of an astronaut" >
+                ar
+                ar-modes="webxr"
+                camera-controls
+                camera-orbit="-50deg 90deg 5.5m"
+                camera-target="0m 0.5m 0.5m"
+                field-of-view ="90deg"
+                max-camera-orbit = "Infinity 80.5deg 22.5deg"
+                ar-scale="auto"
+                background-color="#70BCD1"
+                shadow-intensity="1" 
+                ios-src="third_party/a6/A6.usdz" 
+                alt="A 3D model of an astronaut" >
+  <button slot="hotspot-2" class="hotspot" data-position="-0.856220320485195m 0.8130342423605037m -0.018299614123668696m" data-normal="-0.824350654813954m 0.21103814720295916m -0.5252703097767354m"></button>
+  <button slot="hotspot-1" class="hotspot" data-position="-0.6733069043894987m 0.6434413617286839m 2.1964927487541694m" data-normal="-0.6821452354140144m 0.6986820625659036m -0.21568786069367374m"></button>
   </model-viewer>
-  <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF/Avocado.gltf#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;">Avocado</a>
+  
 </body>
 
 </html>
