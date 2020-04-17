@@ -14,11 +14,36 @@
  * limitations under the License.
  */
 
+ @font-face {
+  font-family: 'AudiTypeBold';
+  src: url('fonts/AudiType-ExtendedBold.eot');
+  src: url('fonts/AudiType-ExtendedBold.eot') format('embedded-opentype'), url('../fonts/AudiType-ExtendedBold.woff') format('woff'), url('../fonts/AudiType-ExtendedBold.ttf') format('truetype');
+  /*font-weight: bold;*/
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AudiTypeNormal';
+  src: url('fonts/AudiType-ExtendedNormal.eot');
+  src: url('fonts/AudiType-ExtendedNormal.eot') format('embedded-opentype'), url('../fonts/AudiType-ExtendedNormal.woff') format('woff'), url('../fonts/AudiType-ExtendedNormal.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AudiType';
+  src: url('fonts/AudiType-Normal.eot');
+  src: url('fonts/AudiType-Normal.eot') format('embedded-opentype'), url('../fonts/AudiType-Normal.woff') format('woff'), url('../fonts/AudiType-Normal.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   margin: 1em;
   padding: 0;
-  font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif;
+  font-family: 'AudiTypeNormal';
   color: #244376;
+  overflow: hidden;
+  background-image: linear-gradient(#000000BF, #00000000);
 }
 
 
@@ -33,8 +58,12 @@ body {
 }
 
 model-viewer {
-  width: 100%;
-  height: 400px;
+  position: absolute;
+    left: 50%;
+    top: 46%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
 }
 
 .attribution {
@@ -64,6 +93,103 @@ footer {
   max-width: 600px;
   margin: auto;
   text-align: center;
-  font-style: italic;
   line-height: 1.5em;
+}
+.colorize{
+  position: fixed;
+  left: 0;
+  bottom: 38px;
+  width: 100%;
+  height: 70px;
+  color: white;
+  text-align: center;
+}
+
+.switch6 {
+  margin: 0 auto;
+  width: 167px;
+  position: relative;
+  border-radius: 100px;
+  border: 1px solid #444 !important;
+  font-size: 12px;
+  top: 21px;
+  left: -82px;
+  background-color: #212121;
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  /* pointer-events: none; */
+}
+span#exc_rad {
+  color: #fff;
+}
+.switch6-light {
+  display: block;
+  height: 35px;
+  position: relative;
+  width: 180px;
+}
+.switch6-light > span {
+  position: absolute;
+  left: -100px;
+  width: 100%;
+  margin: 0px;
+  padding-right: 100px;
+  text-align: left;
+}
+.switch6-light label, .switch6-light > span {
+  line-height: 30px;
+  vertical-align: middle;
+}
+.switch6-light > span, .switch-toggle > span {
+  color: #A2A2A2;
+}
+.switch6-light * {
+  box-sizing: border-box;
+}
+.switch6-light input {
+  position: absolute;
+  opacity: 0;
+  z-index: 5;
+}
+
+.switch6-light > span span {
+  position: absolute;
+  top: 3px;
+  left: 0px;
+  z-index: 5;
+  display: block;
+  color: #444;
+  width: 50%;
+  margin-left: 100px;
+  text-align: center;
+}
+.switch6-light > span span:last-child {
+ left: 45%;
+}
+span#exc_rad {
+  color: #fff;
+}
+.inner_btn {
+  border-radius: 100px !important;
+  background: #cdcdcd!important;
+  border: #cdcdcd!important;
+  color: #000000 !important;
+}
+
+.switch6-light a {
+  position: absolute;
+  right: 50%;
+  top: 2px;
+  z-index: 4;
+  display: block;
+  width: 50%;
+  height: 100%;
+  padding: 0px;
+}
+.info{
+  position: absolute;
+  bottom: 8px;
+  right: 36px;
+  font-size: 18px;
 }
