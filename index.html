@@ -43,6 +43,7 @@ limitations under the License.
       height: 100%;
       font-size: 10pt;
       overflow: hidden;
+      font-family: 'AudiTypeNormal';
     }
 
     label {
@@ -182,10 +183,21 @@ limitations under the License.
 </span>
 <!--span class="inst_360" style="position: absolute; text-align: center;"><img src="images/360-button.png"></span-->
 
-<model-viewer src="third_party/a6/a6.glb" id="lazy-load" ar ar-modes="webxr scene-viewer quick-look fallback"
-  ar-scale="auto" camera-controls field-of-view="90deg" interaction-prompt="auto" interaction-policy="always-allow"
-  interaction-prompt-style="wiggle" max-camera-orbit="Infinity 80.5deg 80deg" shadow-intensity="1"
-  quick-look-browsers="safari chrome" ios-src="third_party/a6/A6.usdz" alt="Audi A6 WebAR">
+<model-viewer 
+      src="third_party/a6/a6.glb" 
+      id="lazy-load" 
+      ar 
+      ar-modes="webxr scene-viewer quick-look fallback"
+      ar-scale="30%" 
+      camera-controls
+      camera-orbit ="0deg 75deg 30m"
+      interaction-prompt="auto" 
+      interaction-policy="always-allow"
+      interaction-prompt-style="wiggle" 
+      max-camera-orbit="Infinity 80.5deg 80deg" 
+      shadow-intensity="1"
+      quick-look-browsers="safari chrome" 
+      ios-src="third_party/a6/a66.usdz" alt="Audi A6 WebAR">
 
   <button slot="ar-button" style="background-color: #000000;
                 display: flex;
@@ -216,11 +228,51 @@ limitations under the License.
       </label>
       </div>
       <div class="info">
-          <img src="images/info.png">
+          <img src="images/info.png" id="myBtn">
       </div>
   </div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <img src="images/AR-tap.png"><p>&nbsp;TAP on the screen to place your vehicle</p>
+    <img src="images/Ar-zoom.png"><p>&nbsp;PINCH to Zoom in and out your vehicle</p>
+    <img src="images/Ar-move.png"><p>&nbsp;PRESS and DRAG Vehicle to move the vehicle</p>
+  </div>
+</div>
+
+  
 </footer>
 </body>
+<script>
+  // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 
 <!--a href="interior/output/index.html">Click here for Interior</a-->
 
