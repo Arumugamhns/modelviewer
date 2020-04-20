@@ -23,156 +23,37 @@ limitations under the License.
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="demo-styles.css">
-  <!-- 💁 Include both scripts below to support all browsers! -->
+  <link rel="stylesheet" href="style.css">
 
-  <!-- Loads <model-viewer> for modern browsers: -->
-  <script src="js/polyfills.js"></script>
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js">
-  </script>
+  <!-- The following libraries and polyfills are recommended to maximize browser support -->
+  <!-- NOTE: you must adjust the paths as appropriate for your project -->
 
-  <script type="module" src="https://unpkg.com/@google/model-viewer@0.3.1/dist/model-viewer.js">
-  </script>
+  <!-- 🚨 REQUIRED: Web Components polyfill to support Edge and Firefox < 63 -->
+  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-loader.js"></script>
+
+  <!-- 💁 OPTIONAL: Intersection Observer polyfill for better performance in Safari and IE11 -->
+  <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+
+  <!-- 💁 OPTIONAL: Resize Observer polyfill improves resize behavior in non-Chrome browsers -->
+  <script src="https://unpkg.com/resize-observer-polyfill@1.5.0/dist/ResizeObserver.js"></script>
+
+  <!-- 💁 OPTIONAL: Fullscreen polyfill is needed to fully support AR features -->
+  <script src="https://unpkg.com/fullscreen-polyfill@1.0.2/dist/fullscreen.polyfill.js"></script>
+
+  <!-- 💁 OPTIONAL: Include prismatic.js for Magic Leap support -->
+  <script src="https://unpkg.com/@magicleap/prismatic/prismatic.min.js"></script>
+
+  <!-- 💁 OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
+  <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer@0.3.1/dist/model-viewer.js"></script>
 
   <!-- Loads <model-viewer> for old browsers like IE11: -->
-  <script nomodule src="https://unpkg.com/@google/model-viewer@0.3.1/dist/model-viewer-legacy.js">
-  </script>
-  <script src="https://unpkg.com/@magicleap/prismatic@0.18.2/prismatic.min.js"></script>
+  <script nomodule src="https://unpkg.com/@google/model-viewer@0.3.1/dist/model-viewer-legacy.js"></script>
   <style>
-    body,
-    html {
-      height: 100%;
-      font-size: 10pt;
-      overflow: hidden;
-      font-family: 'AudiTypeNormal';
-    }
 
-    label {
-      display: inline-block;
-      width: 120px;
-      height: 24px;
-    }
-
-    input {
-      vertical-align: middle;
-    }
-
-    input.number {
-      border: 0;
-      background: transparent;
-      font-size: 16px;
-      width: 32px;
-      outline: none;
-    }
-
-    select {
-      font-size: 14px;
-    }
-
-    #container {
-      display: flex;
-      height: 100%;
-    }
-
-    #instructions {
-      width: 320px;
-      margin-top: 10px;
-      margin-left: 30px;
-      margin-bottom: 20px;
-    }
-
-    .hotspot {
-      width: 20px;
-      height: 20px;
-      border-radius: 10px;
-      border: none;
-      background-color: blue;
-      --min-hotspot-opacity: 0;
-    }
-
-    .annotation {
-      background-color: #888888;
-      position: absolute;
-      transform: translate(10px, 10px);
-      border-radius: 10px;
-      padding: 10px;
-      text-align: left;
-    }
-
-    .hotspot.selected {
-      background-color: red;
-    }
-
-    .hotspot:not(.selected)>.annotation {
-      display: none;
-    }
-
-    @media screen and (max-width: 320px) {
-      #instructions {
-        display: none;
-      }
-    }
-
-    .inst_360 {
-      position: absolute;
-      left: 50%;
-      top: 60%;
-      transform: translate(-50%, -50%);
-      width: 175px;
-      height: 50px;
-      padding: 20px;
-    }
-
-    ul>li {
-      display: inline-block;
-      zoom: 1;
-      *display: inline;
-      padding-left: 10px;
-      margin: 0px;
-    }
-
-    .logo {
-      width: 100%;
-    }
-
-    .logo_list {
-      margin-left: -50px;
-      float: left;
-      width: 50%;
-    }
-
-    .act_ar {
-      height: 44px;
-      width: 105px;
-      color: white;
-
-    }
-
-    --ar-button-display {
-      display: block;
-    }
-
-    .slot.ar-button {
-      display: block !important;
-    }
-    #button-load {
-    background-image: url(../assets/ic_get_app_white_24dp.svg);
-    background-repeat: no-repeat;
-    background-size: 24px 24px;
-    background-position: 6% 50%;
-    background-color: #000;
-    color: white;
-    cursor: pointer;
-    border-radius: 6px;
-    display: inline-block;
-    padding: 10px 18px 9px 40px;
-    font-weight: 500;
-    box-shadow: 0 0 8px rgba(0,0,0,.2), 0 0 4px rgba(0,0,0,.25);
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    z-index: 100;
-}
   </style>
 </head>
 <span class="logo">
@@ -183,21 +64,11 @@ limitations under the License.
 </span>
 <!--span class="inst_360" style="position: absolute; text-align: center;"><img src="images/360-button.png"></span-->
 
-<model-viewer 
-      src="third_party/a6/a6.glb" 
-      id="lazy-load" 
-      ar 
-      ar-modes="webxr scene-viewer quick-look fallback"
-      ar-scale="30%" 
-      camera-controls
-      camera-orbit ="0deg 75deg 30m"
-      interaction-prompt="auto" 
-      interaction-policy="always-allow"
-      interaction-prompt-style="wiggle" 
-      max-camera-orbit="Infinity 80.5deg 80deg" 
-      shadow-intensity="1"
-      quick-look-browsers="safari chrome" 
-      ios-src="third_party/a6/a66.usdz" alt="Audi A6 WebAR">
+<model-viewer src="third_party/a6/a6.glb" id="lazy-load" ar ar-modes="webxr scene-viewer quick-look fallback"
+  ar-scale="30%" camera-controls camera-orbit="0deg 75deg 30m" max-camera-orbit="Infinity 80.5deg 80deg"
+  field-of-view="50deg" max-field-of-view="45deg" min-field-of-view="-130deg" interaction-prompt="auto"
+  interaction-policy="always-allow" interaction-prompt-style="wiggle" shadow-intensity="5"
+  quick-look-browsers="safari chrome" ios-src="third_party/a6/audia6.usdz" data-js-focus-visible alt="Audi A6 WebAR">
 
   <button slot="ar-button" style="background-color: #000000;
                 display: flex;
@@ -210,68 +81,98 @@ limitations under the License.
                 float:right;  position: absolute;top: 45px; right: 16px; ">
     Activate AR
   </button>
+  <!--button slot="hotspot-1" class="hotspot" data-position="-0.02658798732864385m 0.5665576547770742m 0.009121507970925237m" data-normal="-0.006086936267878379m 0.11258656173247557m -0.9936232763598738m" onclick="foo()"><div class="annotation">data-position:
+    -0.02658798732864385m 0.5665576547770742m 0.009121507970925237m
+    data-normal:
+    -0.006086936267878379m 0.11258656173247557m -0.9936232763598738m</div></button-->
   <!--button slot="hotspot-2" class="hotspot" data-position="-0.856220320485195m 0.8130342423605037m -0.018299614123668696m" data-normal="-0.824350654813954m 0.21103814720295916m -0.5252703097767354m"></button>
   <button slot="hotspot-1" class="hotspot" data-position="-0.6733069043894987m 0.6434413617286839m 2.1964927487541694m" data-normal="-0.6821452354140144m 0.6986820625659036m -0.21568786069367374m"></button-->
-    <div id="lazy-load-poster" slot="poster"></div>
-    <div id="button-load" slot="poster">Loading Assets</div>
+  <div id="lazy-load-poster" slot="poster"></div>
+  <div id="progress" slot="progress-bar">
+    <div class="center">
+      <div class="skillbar">
+        <div class="skill_perecentage">
+          <div class="skill_level" style="width: 85%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </model-viewer>
 <footer>
-  <div class="colorize">
-    <div class="switch6" style="border:1px solid #999999;">
-      <label class="switch6-light ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-button-inherit" onclick=""><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>
-        <input type="checkbox" class="ui-checkboxradio ui-helper-hidden-accessible">
-        <span>
-          <span class="std_radio">Exterior</span>
-          <span id="exc_rad" class="exc_radio" disabled="">Interior</span>
-        </span>
-        <a class="btn btn-primary inner_btn"></a>
-      </label>
-      </div>
-      <div class="info">
-          <img src="images/info.png" id="myBtn">
-      </div>
+  <div class="colorize">   
+    <div class="info">
+      <img src="images/info.png" id="myBtn">
+    </div>
   </div>
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <img src="images/AR-tap.png"><p>&nbsp;TAP on the screen to place your vehicle</p>
-    <img src="images/Ar-zoom.png"><p>&nbsp;PINCH to Zoom in and out your vehicle</p>
-    <img src="images/Ar-move.png"><p>&nbsp;PRESS and DRAG Vehicle to move the vehicle</p>
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="images/AR-tap.png">
+      <p>&nbsp;TAP on the screen to place your vehicle</p>
+      <img src="images/Ar-zoom.png">
+      <p>&nbsp;PINCH to Zoom in and out your vehicle</p>
+      <img src="images/Ar-move.png">
+      <p>&nbsp;PRESS and DRAG Vehicle to move the vehicle</p>
+    </div>
   </div>
-</div>
 
-  
+
 </footer>
 </body>
 <script>
   // Get the modal
-var modal = document.getElementById("myModal");
+  var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+  // When the user clicks the button, open the modal 
+  btn.onclick = function () {
+    modal.style.display = "block";
+  }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function () {
     modal.style.display = "none";
   }
-}
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  function foo() {
+    (() => {
+      const modelViewer = document.querySelector('#lazy-load')
+      self.setInterval(() => {
+        modelViewer.play();
+        modelViewer.animationName = modelViewer.animationName === 'Take 001' ?
+          'Idle' : 'Take 001';
+
+      }, 1500.0);
+    })();
+
+  }
+
+  const modelViewer = document.querySelector('model-viewer');
+  const progress = document.querySelector('#progress');
+  const bar = progress.querySelector('.center');
+
+  modelViewer.addEventListener('progress', (event) => {
+    const { totalProgress } = event.detail;
+    progress.classList.toggle('show', totalProgress < 1);
+    bar.style.transform = `scaleX(${totalProgress})`;
+  });
+
+
 </script>
 
 <!--a href="interior/output/index.html">Click here for Interior</a-->
